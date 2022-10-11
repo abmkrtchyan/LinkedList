@@ -21,5 +21,8 @@ int main() {
     list.print();
     list.insert(0);
     list.print();
+    for (const auto &item: list) {
+        std::cout << item << " -> ";
+    }
     return 0;
 }

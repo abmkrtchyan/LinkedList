@@ -9,6 +9,38 @@ private:
     LinkedListNode<T> *head;
     LinkedListNode<T> *tail;
 public:
+    struct Iterator {
+    private:
+        const LinkedListNode<T> *previousNode = nullptr;
+        const LinkedListNode<T> *currentNode = nullptr;
+    public:
+        Iterator() = default;
+
+        explicit Iterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
+
+        Iterator &operator++() {
+            if (currentNode != nullptr) {
+                previousNode = currentNode;
+                currentNode = currentNode->next;
+            }
+            return *this;
+        };
+
+        Iterator operator++(T) {
+            Iterator temp = *this;
+            ++*this;
+            return temp;
+        };
+
+        bool operator!=(const Iterator &other) const noexcept {
+            return this->currentNode != other.currentNode;
+        };
+
+        T operator*() const noexcept {
+            return this->currentNode->data;
+        };
+    };
+
     LinkedList() : head(nullptr), tail(nullptr) {}
 
     void insert(LinkedListNode<T> *node);
@@ -25,6 +57,14 @@ public:
         }
         std::cout << "/" << std::endl;
     }
+
+    Iterator begin() const noexcept {
+        return Iterator(this->head);
+    };
+
+    Iterator end() const noexcept {
+        return Iterator();
+    };
 };
 
 

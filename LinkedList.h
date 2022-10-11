@@ -5,20 +5,23 @@
 
 template<class T>
 class LinkedList {
+private:
+    LinkedListNode<T> *head;
+    LinkedListNode<T> *tail;
 public:
     LinkedListNode<int> *head;
     LinkedListNode<int> *tail;
 
     LinkedList() : head(nullptr), tail(nullptr) {}
 
-    void insert(LinkedListNode <T> *node);
+    void insert(LinkedListNode<T> *node);
 
     void insert(const T &data);
 
-    static void merge(LinkedList<int>,LinkedList<int>);
+    static void merge(LinkedList<T> &, LinkedList<T> &);
 
     void print() {
-        LinkedListNode <T> *node = this->head;
+        LinkedListNode<T> *node = this->head;
         while (node) {
             node->print();
             node = node->next;
@@ -29,7 +32,7 @@ public:
 
 
 template<class T>
-void LinkedList<T>::insert(LinkedListNode <T> *node) {
+void LinkedList<T>::insert(LinkedListNode<T> *node) {
     if (!this->head) {
         this->head = node;
     } else {
@@ -45,29 +48,26 @@ void LinkedList<T>::insert(const T &data) {
     insert(node);
 }
 
-static void merge(LinkedList<int> &list1,LinkedList<int> &list2){
-    LinkedListNode <int>* node1 = list1.head;
-    LinkedListNode <int>* node2 = list2.head;
-    LinkedList <int> mergedList;
-    while(node1 && node2){
-        if(node1->data<=node2->data){
+template<class T>
+void LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2) {
+    LinkedListNode<T> *node1 = list1.head;
+    LinkedListNode<T> *node2 = list2.head;
+    LinkedList<T> mergedList;
+    while (node1 && node2) {
+        if (node1->data <= node2->data) {
             mergedList.insert(node1->data);
             node1 = node1->next;
-        }
-        else {
+        } else {
             mergedList.insert(node2->data);
             node2 = node2->next;
         }
     }
-    while(node1){
-            mergedList.insert(node1->data);
-            node1 = node1->next;
-        }
-    while(node2){
+    while (node1) {
+        mergedList.insert(node1->data);
+        node1 = node1->next;
+    }
+    while (node2) {
         mergedList.insert(node2->data);
         node2 = node2->next;
     }
-
-
-
 }

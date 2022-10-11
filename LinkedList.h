@@ -8,11 +8,12 @@ class LinkedList {
 private:
     LinkedListNode<T> *head;
     LinkedListNode<T> *tail;
+
 public:
-    struct Iterator {
+
+    class Iterator {
     private:
-        const LinkedListNode<T> *previousNode = nullptr;
-        const LinkedListNode<T> *currentNode = nullptr;
+        const LinkedListNode<int> *currentNode = nullptr;
     public:
         Iterator() = default;
 
@@ -20,25 +21,26 @@ public:
 
         Iterator &operator++() {
             if (currentNode != nullptr) {
-                previousNode = currentNode;
                 currentNode = currentNode->next;
             }
             return *this;
-        };
-
-        Iterator operator++(T) {
-            Iterator temp = *this;
-            ++*this;
-            return temp;
         };
 
         bool operator!=(const Iterator &other) const noexcept {
             return this->currentNode != other.currentNode;
         };
 
-        T operator*() const noexcept {
-            return this->currentNode->data;
+        const LinkedListNode<int> *operator*() const {
+            return this->currentNode;
         };
+    };
+
+    Iterator begin() const {
+        return Iterator(this->head);
+    };
+
+    Iterator end() const {
+        return Iterator();
     };
 
     LinkedList() : head(nullptr), tail(nullptr) {}
@@ -57,14 +59,6 @@ public:
         }
         std::cout << "/" << std::endl;
     }
-
-    Iterator begin() const noexcept {
-        return Iterator(this->head);
-    };
-
-    Iterator end() const noexcept {
-        return Iterator();
-    };
 };
 
 

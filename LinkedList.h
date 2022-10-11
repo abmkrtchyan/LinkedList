@@ -9,9 +9,6 @@ private:
     LinkedListNode<T> *head;
     LinkedListNode<T> *tail;
 public:
-    LinkedListNode<int> *head;
-    LinkedListNode<int> *tail;
-
     LinkedList() : head(nullptr), tail(nullptr) {}
 
     void insert(LinkedListNode<T> *node);

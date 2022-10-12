@@ -11,7 +11,7 @@ private:
 
 public:
 
-    class Iterator {
+    class Iterator : public std::iterator<std::forward_iterator_tag, T, T, const T *, T> {
     private:
         const LinkedListNode<int> *currentNode = nullptr;
     public:
@@ -30,8 +30,12 @@ public:
             return this->currentNode != other.currentNode;
         };
 
-        const LinkedListNode<int> *operator*() const {
-            return this->currentNode;
+        bool operator==(const Iterator &other) const noexcept {
+            return this->currentNode->data == other.currentNode->data;
+        };
+
+        T operator*() const {
+            return this->currentNode->data;
         };
     };
 

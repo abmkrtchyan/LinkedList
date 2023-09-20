@@ -3,15 +3,15 @@
 
 int main() {
     LinkedList<int> list;
-    list.insert(9);
-    list.insert(8);
-    list.insert(7);
-    list.insert(6);
-    list.insert(4);
-    list.insert(3);
-    list.insert(5);
-    list.insert(7);
-    list.insert(0);
+    list.push_back(9);
+    list.push_back(8);
+    list.push_back(7);
+    list.push_back(6);
+    list.push_back(4);
+    list.push_back(3);
+    list.push_back(5);
+    list.push_back(7);
+    list.push_back(0);
     list.print();
     for (auto it: list) {
         std::cout << it << " -> ";

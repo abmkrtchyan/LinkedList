@@ -49,9 +49,9 @@ public:
 
     LinkedList() : head(nullptr), tail(nullptr) {}
 
-    void insert(LinkedListNode<T> *node);
+    void push_back(LinkedListNode<T> *node);
 
-    void insert(const T &data);
+    void push_back(const T &data);
 
     static void merge(LinkedList<T> *, LinkedList<T> *);
 
@@ -67,7 +67,7 @@ public:
 
 
 template<class T>
-void LinkedList<T>::insert(LinkedListNode<T> *node) {
+void LinkedList<T>::push_back(LinkedListNode<T> *node) {
     if (!this->head) {
         this->head = node;
     } else {
@@ -77,9 +77,9 @@ void LinkedList<T>::insert(LinkedListNode<T> *node) {
 }
 
 template<class T>
-void LinkedList<T>::insert(const T &data) {
+void LinkedList<T>::push_back(const T &data) {
     auto *node = new LinkedListNode<T>(data);
-    insert(node);
+    push_back(node);
 }
 
 template<class T>
@@ -89,19 +89,19 @@ void LinkedList<T>::merge(LinkedList<T> *list1, LinkedList<T> *list2) {
     LinkedList<T> mergedList;
     while (node1 && node2) {
         if (node1->data <= node2->data) {
-            mergedList.insert(node1->data);
+            mergedList.push_back(node1->data);
             node1 = node1->next;
         } else {
-            mergedList.insert(node2->data);
+            mergedList.push_back(node2->data);
             node2 = node2->next;
         }
     }
     while (node1) {
-        mergedList.insert(node1->data);
+        mergedList.push_back(node1->data);
         node1 = node1->next;
     }
     while (node2) {
-        mergedList.insert(node2->data);
+        mergedList.push_back(node2->data);
         node2 = node2->next;
     }
 }

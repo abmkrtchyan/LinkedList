@@ -53,7 +53,7 @@ public:
 
     void insert(const T &data);
 
-    static void merge(LinkedList<T> &, LinkedList<T> &);
+    static void merge(LinkedList<T> *, LinkedList<T> *);
 
     void print() {
         LinkedListNode<T> *node = this->head;
@@ -73,7 +73,6 @@ void LinkedList<T>::insert(LinkedListNode<T> *node) {
     } else {
         this->tail->next = node;
     }
-
     this->tail = node;
 }
 
@@ -84,9 +83,9 @@ void LinkedList<T>::insert(const T &data) {
 }
 
 template<class T>
-void LinkedList<T>::merge(LinkedList<T> &list1, LinkedList<T> &list2) {
-    LinkedListNode<T> *node1 = list1.head;
-    LinkedListNode<T> *node2 = list2.head;
+void LinkedList<T>::merge(LinkedList<T> *list1, LinkedList<T> *list2) {
+    LinkedListNode<T> *node1 = list1->head;
+    LinkedListNode<T> *node2 = list2->head;
     LinkedList<T> mergedList;
     while (node1 && node2) {
         if (node1->data <= node2->data) {

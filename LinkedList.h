@@ -2,49 +2,21 @@
 
 #include <iostream>
 #include "LinkedListNode.h"
+#include "ListIterator.h"
 
-template<class T>
+template<typename T>
 class LinkedList {
 private:
     LinkedListNode<T> *head;
     LinkedListNode<T> *tail;
 
 public:
-
-    class Iterator : public std::iterator<std::forward_iterator_tag, T, T, const T *, T> {
-    private:
-        const LinkedListNode<int> *currentNode = nullptr;
-    public:
-        Iterator() = default;
-
-        explicit Iterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
-
-        Iterator &operator++() {
-            if (currentNode != nullptr) {
-                currentNode = currentNode->next;
-            }
-            return *this;
-        };
-
-        bool operator!=(const Iterator &other) const noexcept {
-            return this->currentNode != other.currentNode;
-        };
-
-        bool operator==(const Iterator &other) const noexcept {
-            return this->currentNode->data == other.currentNode->data;
-        };
-
-        T operator*() const {
-            return this->currentNode->data;
-        };
+    Iterator<T> begin() const {
+        return Iterator<T>(this->head);
     };
 
-    Iterator begin() const {
-        return Iterator(this->head);
-    };
-
-    Iterator end() const {
-        return Iterator();
+    Iterator<T> end() const {
+        return Iterator<T>();
     };
 
     LinkedList() : head(nullptr), tail(nullptr) {}

@@ -25,7 +25,7 @@ public:
 
     void push_back(const T &data);
 
-    static void merge(LinkedList<T> *, LinkedList<T> *);
+    static LinkedList<T> *merge(LinkedList<T> *, LinkedList<T> *);
 
     void print() {
         LinkedListNode<T> *node = this->head;
@@ -54,25 +54,26 @@ void LinkedList<T>::push_back(const T &data) {
 }
 
 template<typename T>
-void LinkedList<T>::merge(LinkedList<T> *list1, LinkedList<T> *list2) {
+LinkedList<T> *LinkedList<T>::merge(LinkedList<T> *list1, LinkedList<T> *list2) {
     LinkedListNode<T> *node1 = list1->head;
     LinkedListNode<T> *node2 = list2->head;
-    LinkedList<T> mergedList;
+    auto mergedList = new LinkedList<T>();
     while (node1 && node2) {
         if (node1->data <= node2->data) {
-            mergedList.push_back(node1->data);
+            mergedList->push_back(node1->data);
             node1 = node1->next;
         } else {
-            mergedList.push_back(node2->data);
+            mergedList->push_back(node2->data);
             node2 = node2->next;
         }
     }
     while (node1) {
-        mergedList.push_back(node1->data);
+        mergedList->push_back(node1->data);
         node1 = node1->next;
     }
     while (node2) {
-        mergedList.push_back(node2->data);
+        mergedList->push_back(node2->data);
         node2 = node2->next;
     }
+    return mergedList;
 }

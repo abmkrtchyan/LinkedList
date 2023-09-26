@@ -3,32 +3,35 @@
 
 #include <iostream>
 #include "LinkedListNode.h"
+#include "Iterator.h"
 
 template<typename T>
-class ForwardIterator {
+class ForwardIterator : public Iterator<T> {
 private:
-    const LinkedListNode<T> *currentNode = nullptr;
+    const LinkedListNode<T> *currentNode;
 public:
-    ForwardIterator() = default;
+    explicit ForwardIterator(const LinkedListNode<T> *node = nullptr) noexcept: currentNode(node) {}
 
-    explicit ForwardIterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
-
-    ForwardIterator &operator++() {
+    Iterator<T> &operator++() override {
         if (currentNode != nullptr) {
             currentNode = currentNode->next;
         }
         return *this;
     };
 
-    bool operator!=(const ForwardIterator &other) const noexcept {
-        return this->currentNode != other.currentNode;
+    bool operator!=(const Iterator<T> &other) const noexcept override {
+        return **this != *other;
     };
 
-    bool operator==(const ForwardIterator &other) const noexcept {
-        return this->currentNode->data == other.currentNode->data;
+    bool operator==(const Iterator<T> &other) const noexcept override {
+        return this->getCurrent() == other.getCurrent();
     };
 
-    T operator*() const {
+    LinkedListNode<T> *getCurrent() const override {
+        return this->currentNode;
+    };
+
+    const T &operator*() const override {
         return this->currentNode->data;
     };
 };

@@ -11,12 +11,12 @@ private:
     LinkedListNode<T> *tail;
 
 public:
-    Iterator<T> begin() const {
-        return Iterator<T>(this->head);
+    ForwardIterator<T> begin() const {
+        return ForwardIterator<T>(this->head);
     };
 
-    Iterator<T> end() const {
-        return Iterator<T>();
+    ForwardIterator<T> end() const {
+        return ForwardIterator<T>();
     };
 
     LinkedList() : head(nullptr), tail(nullptr) {}

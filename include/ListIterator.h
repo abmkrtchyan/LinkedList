@@ -5,26 +5,26 @@
 #include "LinkedListNode.h"
 
 template<typename T>
-class Iterator : public std::iterator<std::forward_iterator_tag, T, T, const T *, T> {
+class ForwardIterator {
 private:
     const LinkedListNode<T> *currentNode = nullptr;
 public:
-    Iterator() = default;
+    ForwardIterator() = default;
 
-    explicit Iterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
+    explicit ForwardIterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
 
-    Iterator &operator++() {
+    ForwardIterator &operator++() {
         if (currentNode != nullptr) {
             currentNode = currentNode->next;
         }
         return *this;
     };
 
-    bool operator!=(const Iterator &other) const noexcept {
+    bool operator!=(const ForwardIterator &other) const noexcept {
         return this->currentNode != other.currentNode;
     };
 
-    bool operator==(const Iterator &other) const noexcept {
+    bool operator==(const ForwardIterator &other) const noexcept {
         return this->currentNode->data == other.currentNode->data;
     };
 

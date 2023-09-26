@@ -1,5 +1,5 @@
 #include "LinkedList.h"
-#include "algorithm"
+#include "algoritms.h"
 
 int main() {
     LinkedList<int> list;
@@ -16,8 +16,5 @@ int main() {
     for (auto it: list) {
         std::cout << it << " -> ";
     }
-    auto itr1 = std::find(list.begin(), list.end(), 7);
-    auto itr2 = std::find(itr1, list.end(), 7);
-    std::cout << "\n" << *itr2;
     return 0;
 }

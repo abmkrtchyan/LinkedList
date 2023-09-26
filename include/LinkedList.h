@@ -11,15 +11,15 @@ private:
     LinkedListNode<T> *tail;
 
 public:
-    ForwardIterator<T> begin() const {
-        return ForwardIterator<T>(this->head);
+    ForwardIterator<LinkedList<T>, LinkedListNode<T>> begin() const {
+        return ForwardIterator<LinkedList<T>, LinkedListNode<T>>(this->head);
     };
 
-    ForwardIterator<T> end() const {
-        return ForwardIterator<T>();
+    ForwardIterator<LinkedList<T>, LinkedListNode<T>> end() const {
+        return ForwardIterator<LinkedList<T>, LinkedListNode<T>>();
     };
 
-    LinkedList() : head(nullptr), tail(nullptr) {}
+    LinkedList<T>() : head(nullptr), tail(nullptr) {}
 
     void push_back(LinkedListNode<T> *node);
 
@@ -37,8 +37,7 @@ public:
     }
 };
 
-
-template<class T>
+template<typename T>
 void LinkedList<T>::push_back(LinkedListNode<T> *node) {
     if (!this->head) {
         this->head = node;
@@ -48,13 +47,13 @@ void LinkedList<T>::push_back(LinkedListNode<T> *node) {
     this->tail = node;
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::push_back(const T &data) {
     auto *node = new LinkedListNode<T>(data);
     push_back(node);
 }
 
-template<class T>
+template<typename T>
 void LinkedList<T>::merge(LinkedList<T> *list1, LinkedList<T> *list2) {
     LinkedListNode<T> *node1 = list1->head;
     LinkedListNode<T> *node2 = list2->head;

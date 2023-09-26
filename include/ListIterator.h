@@ -1,38 +1,36 @@
 #ifndef LINKED_LIST_LIST_ITERATOR_H
 #define LINKED_LIST_LIST_ITERATOR_H
 
-#include <iostream>
-#include "LinkedListNode.h"
 #include "Iterator.h"
 
-template<typename T>
-class ForwardIterator : public Iterator<T> {
+template<typename C, typename T>
+class ForwardIterator : public Iterator<C, T> {
 private:
-    const LinkedListNode<T> *currentNode;
+    T *currentNode;
 public:
-    explicit ForwardIterator(const LinkedListNode<T> *node = nullptr) noexcept: currentNode(node) {}
+    explicit ForwardIterator(T *node = nullptr) noexcept: currentNode(node) {}
 
-    Iterator<T> &operator++() override {
+    Iterator<C, T> &operator++() override {
         if (currentNode != nullptr) {
             currentNode = currentNode->next;
         }
         return *this;
     };
 
-    bool operator!=(const Iterator<T> &other) const noexcept override {
-        return **this != *other;
+    bool operator!=(const Iterator<C, T> &other) const noexcept override {
+        return this->getCurrent() != other.getCurrent();
     };
 
-    bool operator==(const Iterator<T> &other) const noexcept override {
+    bool operator==(const Iterator<C, T> &other) const noexcept override {
         return this->getCurrent() == other.getCurrent();
     };
 
-    LinkedListNode<T> *getCurrent() const override {
+    T *getCurrent() const override {
         return this->currentNode;
     };
 
-    const T &operator*() const override {
-        return this->currentNode->data;
+    T &operator*() const override {
+        return *this->currentNode;
     };
 };
 

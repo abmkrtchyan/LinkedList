@@ -1,5 +1,4 @@
 #include "LinkedList.h"
-#include "algoritms.h"
 
 int main() {
     LinkedList<int> list;
@@ -13,8 +12,8 @@ int main() {
     list.push_back(7);
     list.push_back(0);
     list.print();
-    for (auto it: list) {
-        std::cout << it << " -> ";
+    for (auto &it: list) {
+        std::cout << it.data << " -> ";
     }
     return 0;
 }

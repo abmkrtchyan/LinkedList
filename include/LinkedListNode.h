@@ -13,6 +13,14 @@ public:
 
     explicit LinkedListNode(const T &data) : data(data), next(nullptr) {}
 
+    bool operator<(const LinkedListNode<T> &other) {
+        return this->data < other.data;
+    }
+
+    bool operator==(const LinkedListNode<T> &other) const {
+        return this->data == other.data;
+    }
+
     void print() {
         std::cout << this->data << " -> ";
     }

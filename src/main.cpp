@@ -1,3 +1,4 @@
+#include "algorithm"
 #include "LinkedList.h"
 
 int main() {
@@ -30,5 +31,7 @@ int main() {
         std::cout << it.data << " -> ";
     }
     std::cout << "/\n";
+
+    std::find(list1.begin(), list1.end(), 1);
     return 0;
 }

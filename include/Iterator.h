@@ -4,19 +4,19 @@
 template<typename T>
 class Iterator {
 public:
-    virtual Iterator<T> &operator++() = 0;
+    virtual Iterator<T> &operator++() {};
 
-    virtual bool operator!=(const Iterator<T> &other) const noexcept = 0;
+    virtual bool operator!=(const Iterator<T> &other) const noexcept {};
 
-    virtual bool operator==(const Iterator<T> &other) const noexcept = 0;
+    virtual bool operator==(const Iterator<T> &other) const noexcept {};
 
-    virtual const T *getCurrent() const = 0;
+    virtual const T *getCurrent() const {};
 
-    virtual T &operator*() = 0;
+    virtual T &operator*() {};
 
-    virtual T *operator->() = 0;
+    virtual T *operator->() {};
 
-    virtual const T &operator*() const = 0;
+    virtual const T &operator*() const {};
 };
 
 #endif //LINKEDLIST_ITERATOR_H

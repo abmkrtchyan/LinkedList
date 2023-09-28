@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include "LinkedListNode.h"
-#include "ListIterator.h"
 
 template<typename T>
 class LinkedList {
@@ -11,12 +10,42 @@ private:
     LinkedListNode<T> *tail;
 
 public:
-    ForwardIterator<LinkedListNode<T>> begin() const {
-        return ForwardIterator<LinkedListNode<T>>(this->head);
+    class Iterator : public std::iterator<std::forward_iterator_tag, T, T, const T *, T> {
+    private:
+        const LinkedListNode<int> *currentNode = nullptr;
+    public:
+        Iterator() = default;
+
+        explicit Iterator(const LinkedListNode<T> *node) noexcept: currentNode(node) {}
+
+        Iterator &operator++() {
+            if (currentNode != nullptr) {
+                currentNode = currentNode->next;
+            }
+            return *this;
+        };
+
+        bool operator!=(const Iterator &other) const noexcept {
+            return this->currentNode != other.currentNode;
+        };
+
+        bool operator==(const Iterator &other) const noexcept {
+            if (currentNode && other.currentNode)
+                return this->currentNode->data == other.currentNode->data;
+            return currentNode == other.currentNode;
+        };
+
+        T operator*() const {
+            return this->currentNode->data;
+        };
     };
 
-    ForwardIterator<LinkedListNode<T>> end() const {
-        return ForwardIterator<LinkedListNode<T>>();
+    Iterator begin() const {
+        return Iterator(this->head);
+    };
+
+    Iterator end() const {
+        return Iterator();
     };
 
     LinkedList<T>() : head(nullptr), tail(nullptr) {}

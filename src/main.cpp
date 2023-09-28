@@ -32,6 +32,6 @@ int main() {
     }
     std::cout << "/\n";
 
-    std::find(list1.begin(), list1.end(), 1);
+//    std::find(list1.begin(), list1.end(), 1);
     return 0;
 }

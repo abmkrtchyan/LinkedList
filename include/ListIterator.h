@@ -3,25 +3,25 @@
 
 #include "Iterator.h"
 
-template<typename C, typename T>
-class ForwardIterator : public Iterator<C, T> {
+template<typename T>
+class ForwardIterator : public Iterator<T> {
 private:
     T *currentNode;
 public:
     explicit ForwardIterator(T *node = nullptr) noexcept: currentNode(node) {}
 
-    Iterator<C, T> &operator++() override {
+    Iterator<T> &operator++() override {
         if (currentNode != nullptr) {
             currentNode = currentNode->next;
         }
         return *this;
     };
 
-    bool operator!=(const Iterator<C, T> &other) const noexcept override {
+    bool operator!=(const Iterator<T> &other) const noexcept override {
         return this->getCurrent() != other.getCurrent();
     };
 
-    bool operator==(const Iterator<C, T> &other) const noexcept override {
+    bool operator==(const Iterator<T> &other) const noexcept override {
         return this->getCurrent() == other.getCurrent();
     };
 

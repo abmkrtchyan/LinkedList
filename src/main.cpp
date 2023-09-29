@@ -1,14 +1,5 @@
-//#include <algorithm>
+#include "algorithm"
 #include "LinkedList.h"
-
-template<class InputIterator, class T>
-InputIterator find(InputIterator first, InputIterator last, const T &val) {
-    while (first != last) {
-        if (first->data == val) return first;
-        ++first;
-    }
-    return last;
-}
 
 int main() {
     LinkedList<int> list1;
@@ -40,6 +31,9 @@ int main() {
         std::cout << it << " -> ";
     }
     std::cout << "/\n";
-    find(list1.begin(), list1.end(), 2);
+    auto xx = find(list1.begin(), list1.end(), 3);
+    if (xx != list1.end()) {
+        std::cout << *xx << std::endl;
+    }
     return 0;
 }

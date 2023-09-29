@@ -4,7 +4,8 @@
 #include "Iterator.h"
 
 template<typename T, typename value_type>
-class ForwardIterator : public Iterator<T, value_type> {
+class ForwardIterator : public Iterator<T, value_type>,
+                        public std::iterator<std::forward_iterator_tag, T, T, const T *, T> {
 private:
     T *currentNode;
 public:

@@ -21,7 +21,7 @@ public:
         return this->data == other.data;
     }
 
-    const T &getValue() const {
+    T &getValue() {
         return this->data;
     }
 

@@ -3,19 +3,19 @@
 
 #include "Iterator.h"
 
-template<typename T>
-class ForwardIterator : public Iterator<T> {
+template<typename T, typename value_type>
+class ForwardIterator : public Iterator<T, value_type> {
 private:
     T *currentNode;
 public:
     explicit ForwardIterator(T *node = nullptr) noexcept: currentNode(node) {}
 
-    T &operator*() override {
-        return (*this->currentNode);
+    value_type &operator*() override {
+        return (this->currentNode->getValue());
     };
 
-    const T &operator*() const override {
-        return (*this->currentNode);
+    const value_type &operator*() const override {
+        return (this->currentNode->getValue());
     };
 
 
@@ -23,7 +23,7 @@ public:
         return currentNode;
     };
 
-    ForwardIterator<T> &operator=(const ForwardIterator<T> &other) noexcept {
+    ForwardIterator<T, value_type> &operator=(const ForwardIterator<T, value_type> &other) noexcept {
         if (this != &other) {
             currentNode = other.currentNode;
         }
@@ -31,18 +31,18 @@ public:
     }
 
 
-    Iterator<T> &operator++() override {
+    Iterator<T, value_type> &operator++() override {
         if (currentNode != nullptr) {
             currentNode = currentNode->next;
         }
         return *this;
     };
 
-    bool operator!=(const Iterator<T> &other) const noexcept override {
+    bool operator!=(const Iterator<T, value_type> &other) const noexcept override {
         return this->getCurrent() != other.getCurrent();
     };
 
-    bool operator==(const Iterator<T> &other) const noexcept override {
+    bool operator==(const Iterator<T, value_type> &other) const noexcept override {
         return this->getCurrent() == other.getCurrent();
     };
 

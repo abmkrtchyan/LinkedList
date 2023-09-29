@@ -21,6 +21,10 @@ public:
         return this->data == other.data;
     }
 
+    const T &getValue() const {
+        return this->data;
+    }
+
     void print() {
         std::cout << this->data << " -> ";
     }
